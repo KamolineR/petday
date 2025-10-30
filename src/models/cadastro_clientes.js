@@ -1,7 +1,25 @@
-app.post('/cadastro', async (req, res) => {
-    try {
-        const {nome, telefone, endereco, email, senha} = req.body;
-        const novoCadastro = await cadastro.create({ nome, telefone, endereco, email, senha});
-        res.status(200).json(novoCadastro)
-    }
-})
+const { DataTypes } = require('sequelize');
+const conexao = require('../config/database');
+
+const cliente = conexao.define('cliente', {
+    nome: {
+        type: DataTypes.STRING(150),
+        allowNull: false,
+    },
+    telefone: {
+        type: DataTypes.INTERGER(20),
+        allowNull: false
+    },
+    endereco: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+});
+
+cliente.sync();
+
+module.exports = cliente;
