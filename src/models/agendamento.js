@@ -2,12 +2,23 @@ const { DataTypes } = require('sequelize');
 const conexao = require('../config/database');
 
 const agendamento = conexao.define('agendamento', {
-    data: {
-        type: DataTypes.DATE,
-        allowNull: false,
+    agendamento_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
     },
-    hora: {
-        type: DataTypes.TIME,
+    cliente_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    pet_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    data_hora: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
         allowNull: false,
     },
     endereco_atendimento: {
@@ -16,9 +27,15 @@ const agendamento = conexao.define('agendamento', {
     },
     transporte: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false
     },
     status: {
-        type: DataTypes.ENUM('')
+        type: DataTypes.ENUM('Agendado', 'Finalizado', 'Cancelado')
     }
-})
+}, {
+    tableName: agendamento,
+    timestamps: false
+});
+
+
+module.exports = agendamento

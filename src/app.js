@@ -1,14 +1,6 @@
-const conexao = require('./config/database')
-const bodyparser = require('body-parser')
-
-conexao.authenticate()  // conexão com o banco
-    .then(() =>{
-        console.log('Conexão com o banco de dados feita com sucesso.');
-        return conexao.sync();
-    })
-    .catch(err =>{
-        console.error('Erro ao tentar conectar com o banco de dados')
-    });
+const conexao = require('./config/database');  // puxa a config da conexão com o banco de dados
+const bodyparser = require('body-parser');     // traduz java para json
+const app = express();                         // utilização do express
 
 
 

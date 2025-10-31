@@ -1,6 +1,6 @@
-const express = require('express')
+const app = require('./app');  // puxa o app.js (configuração do express)
+require('./config/database');
 
-const app = express() // criação do servidor
 app.listen(3000, () => {
-    console.log('Servidor rodando');
+    console.log('Servidor inicializado');   // inicio do servidor
 });

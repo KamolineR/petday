@@ -2,13 +2,23 @@ const { DataTypes } = require('sequelize');
 const conexao = require('../config/database');
 
 const servico = conexao.define('servico', {
+    servico_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    empresa_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     tipo: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: false
     },
     descricao: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     preco_base: {
         type: DataTypes.DECIMAL(10, 2),
@@ -20,14 +30,11 @@ const servico = conexao.define('servico', {
     },
     status: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
         allowNull: false
     },
 }, {
     tableName: 'Servico',
     timestamps: false
 });
-
-servico.sync();
 
 module.exports = servico;
