@@ -2,22 +2,23 @@ const { DataTypes } = require('sequelize');
 const conexao = require('../config/database');
 
 const agendamento = conexao.define('agendamento', {
-    preco_unitario: {
-        type: DataTypes.DECIMAL(10,2),
+    data: {
+        type: DataTypes.DATE,
         allowNull: false,
     },
-    subtotal: {
-        type: DataTypes.DECIMAL(10,2),
+    hora: {
+        type: DataTypes.TIME,
         allowNull: false,
     },
-    observacao: {
-        type: DataTypes.STRING(255),
+    endereco_atendimento: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
     },
-}, {
-    tableName: 'agendamento',
-    timestamps: true
-});
-
-agendamento.sync();
-
-module.exports = agendamento;
+    transporte: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.ENUM('')
+    }
+})
