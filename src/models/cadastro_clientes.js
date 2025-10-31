@@ -18,6 +18,9 @@ const cliente = conexao.define('cliente', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+}, {
+    tableName: 'cliente',
+    timestamps: false
 });
 
 cliente.sync();

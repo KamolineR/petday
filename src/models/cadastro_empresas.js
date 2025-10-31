@@ -10,4 +10,11 @@ const empresa = conexao.define('empresa', {
         type: DataTypes.INTEGER(20),
         allowNull: false,
     },
+}, {
+    tableName: 'empresa',
+    timestamps: false
 });
+
+empresa.sync();
+
+module.exports = empresa
