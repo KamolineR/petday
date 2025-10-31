@@ -12,10 +12,6 @@ const porte_servico = conexao.define('porte_servico', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    porte_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
     preco_porte: {
         type: DataTypes.DECIMAL(10, 2),
     }, 
