@@ -1,4 +1,5 @@
 const conexao = require('./config/database');
+
 const empresa = require('./cadastro_empresas');
 const cliente = require('./cadastro_clientes');
 const pet = require('./cadastro_pet');
@@ -133,6 +134,17 @@ servico.belongsToMany(agendamento, {
     as: 'agendamentos'
 });
 
+const syncDatabase = async () => {
+    try {
+        await conexao.sync({ force: false});
+        console.log('Todas as tabelas foram sincronizadas.');
+    } catch (err) {
+        console.error('Erro ao sincronizar tabelas.', error);
+    }
+};
+
+syncDatabase();
+
 module.exports = {
     empresa,
     cliente,
@@ -142,5 +154,6 @@ module.exports = {
     agendamento_servico,
     porte_servico,
     servico,
-    pagamento
+    pagamento,
+    conexao
 };
