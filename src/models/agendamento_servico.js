@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const conexao = require('../config/database');
+const { DataTypes } = require('conexao');
+const conexao = require('./config/database');
 
 const agendamento_servico = conexao.define('agendamento_servico', {
     agendamento_servico_id: {

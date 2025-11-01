@@ -1,5 +1,5 @@
-const {DataTypes} = require = ('sequelize');
-const conexao = requere = ('../config/database');
+const { DataTypes } = require('sequelize');
+const conexao = require('./config/database');
 
 const empresa = conexao.define('empresa', {
     empresa_id: {

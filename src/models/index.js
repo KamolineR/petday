@@ -1,3 +1,4 @@
+const conexao = require('./config/database');
 const Empresa = require('./cadastro_empresas');
 const Cliente = require('./cadastro_clientes');
 const Pet = require('./cadastro_pet');
