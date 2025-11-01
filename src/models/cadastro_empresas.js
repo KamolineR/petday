@@ -13,12 +13,12 @@ const empresa = conexao.define('empresa', {
         allowNull: false
     },
     telefone: {
-        type: DataTypes.INTEGER(20),
+        type: DataTypes.STRING(20),
         allowNull: false
     }
 }, {
     tableName: 'empresa',
-    timestamps: false
+    timestamps: true
 });
 
 

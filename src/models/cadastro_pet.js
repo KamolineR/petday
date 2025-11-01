@@ -25,7 +25,7 @@ const pet = conexao.define('pet', {
         allowNull: true
     },
     idade: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(3, 2),
         allowNull: false
     },
     sexo: {
@@ -37,8 +37,8 @@ const pet = conexao.define('pet', {
         allowNull: false
     }
 }, {
-    tableName: pet,
-    timestamps: false
+    tableName: 'pet',
+    timestamps: true
 });
 
 

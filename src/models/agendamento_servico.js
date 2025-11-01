@@ -1,4 +1,4 @@
-const { DataTypes } = require('conexao');
+const { DataTypes } = require('sequelize');
 const conexao = require('./config/database');
 
 const agendamento_servico = conexao.define('agendamento_servico', {
@@ -33,7 +33,7 @@ const agendamento_servico = conexao.define('agendamento_servico', {
         allowNull: true
     }
 }, {
-    tableName: 'agendamento',
+    tableName: 'agendamento_servico',
     timestamps: true
 });
 

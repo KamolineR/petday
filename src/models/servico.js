@@ -20,21 +20,18 @@ const servico = conexao.define('servico', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    preco_base: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    },
     duracao_min: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    status: {
+    ativo: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true
     },
 }, {
-    tableName: 'Servico',
-    timestamps: false
+    tableName: 'servico',
+    timestamps: true
 });
 
 module.exports = servico;

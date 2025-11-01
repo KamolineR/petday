@@ -29,7 +29,7 @@ const pagamento = conexao.define('pagamento', {
         allowNull: false
     }
 }, {
-    tableName: pagamento,
+    tableName: 'pagamento',
     timestamps: true
 });
 

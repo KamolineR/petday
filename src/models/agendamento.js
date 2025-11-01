@@ -33,8 +33,8 @@ const agendamento = conexao.define('agendamento', {
         type: DataTypes.ENUM('Agendado', 'Finalizado', 'Cancelado')
     }
 }, {
-    tableName: agendamento,
-    timestamps: false
+    tableName: 'agendamento',
+    timestamps: true
 });
 
 

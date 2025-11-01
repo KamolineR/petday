@@ -1,146 +1,146 @@
 const conexao = require('./config/database');
-const Empresa = require('./cadastro_empresas');
-const Cliente = require('./cadastro_clientes');
-const Pet = require('./cadastro_pet');
-const Porte = require('./porte');
-const Agendamento = require('./agendamento');
-const AgendamentoServico = require('./agendamento_servico');
-const PorteServico = require('./porte_servico');
-const Servico = require('./servico');
-const Pagamento =  require('./pagamento');
+const empresa = require('./cadastro_empresas');
+const cliente = require('./cadastro_clientes');
+const pet = require('./cadastro_pet');
+const porte = require('./porte');
+const agendamento = require('./agendamento');
+const agendamento_servico = require('./agendamento_servico');
+const porte_servico = require('./porte_servico');
+const servico = require('./servico');
+const pagamento = require('./pagamento');
 
-//Cliente (1) - (N) Pet
-
-Cliente.hasMany(Pet, {
+// Cliente (1) - (N) Pet
+cliente.hasMany(pet, {
+    foreignKey: 'cliente_id'
+});
+pet.belongsTo(cliente, {
     foreignKey: 'cliente_id'
 });
 
-Pet.belongsTo(Cliente, {
+// Porte (1) - (N) Pet
+porte.hasMany(pet, {
+    foreignKey: 'porte_id'
+});
+pet.belongsTo(porte, {
+    foreignKey: 'porte_id'
+});
+
+// Cliente (1) - (N) Agendamento
+cliente.hasMany(agendamento, {
+    foreignKey: 'cliente_id'
+});
+agendamento.belongsTo(cliente, {
     foreignKey: 'cliente_id'
 });
 
-//Porte (1) - (N) Pet
-Porte.hasMany(Pet, {
+// Porte (1) - (N) Porte_servico
+porte.hasMany(porte_servico, {
+    foreignKey: 'porte_id'
+});
+porte_servico.belongsTo(porte, {
     foreignKey: 'porte_id'
 });
 
-Pet.belongsTo(Porte, {
-    foreignKey: 'porte_id'
+// Servico (1) - (N) Porte_servico
+servico.hasMany(porte_servico, {
+    foreignKey: 'servico_id'
 });
-
-//Cliente (1) - (N) Agendamento
-Cliente.hasMany(Agendamento, {
-    foreignKey: 'cliente_id'
-});
-
-Agendamento.belongsTo(Cliente, {
-    foreignKey: 'cliente_id'
-});
-
-//Porte (1) - (N) Porte_servico
-Porte.hasMany(PorteServico, {
-    foreignKey: 'porte_id'
-});
-
-PorteServico.belongsTo(Porte, {
-    foreignKey: 'porte_id'
-});
-
-
-//Servico (1) - (N) Porte_servico
-Servico.hasMany(PorteServico, {
+porte_servico.belongsTo(servico, {
     foreignKey: 'servico_id'
 });
 
-PorteServico.belongsTo(Servico, {
-    foreignKey: 'servico_id'
+// Agendamento (1) - (N) Agendamento_servico
+agendamento.hasMany(agendamento_servico, {
+    foreignKey: 'agendamento_id'
 });
-
-
-//Agendamento (1) - (N) Agendamento_servico
-Agendamento.hasMany(AgendamentoServico, {
+agendamento_servico.belongsTo(agendamento, {
     foreignKey: 'agendamento_id'
 });
 
-AgendamentoServico.belongsTo(Agendamento, {
-    foreignKey: 'agendamento_id'
+// Servico (1) - (N) Agendamento_servico
+servico.hasMany(agendamento_servico, {
+    foreignKey: 'servico_id'
+});
+agendamento_servico.belongsTo(servico, {
+    foreignKey: 'servico_id'
 });
 
-
-//Servico (1) - (N) Agendamento_servico
-Servico.hasMany(AgendamentoServico, {
-    foreignKey: 'servico_id'
-})
-
-AgendamentoServico.belongsTo(Servico, {
-    foreignKey: 'servico_id'
-})
-
-//Pet (1) - (N) Agendamento
-Pet.hasMany(Agendamento, {
+// Pet (1) - (N) Agendamento
+pet.hasMany(agendamento, {
+    foreignKey: 'pet_id'
+});
+agendamento.belongsTo(pet, {
     foreignKey: 'pet_id'
 });
 
-Agendamento.belongsTo(Pet, {
-    foreignKey: 'pet_id'
+// Empresa (1) - (N) Servico
+empresa.hasMany(servico, {
+    foreignKey: 'empresa_id'
 });
-
-//Empresa (1) - (N) Servico
-Empresa.hasMany(Servico, {
+servico.belongsTo(empresa, {
     foreignKey: 'empresa_id'
 });
 
-Servico.belongsTo(Empresa, {
-    foreignKey: 'empresa_id'
+// Agendamento (1) - (1) Pagamento
+agendamento.hasOne(pagamento, {
+    foreignKey: 'agendamento_id'
 });
-
-//Agendamento (1) - (1) Pagamento
-Agendamento.hasOne(Pagamento, {
+pagamento.belongsTo(agendamento, {
     foreignKey: 'agendamento_id'
 });
 
-Pagamento.belongsTo(Agendamento, {
-    foreignKey: 'agendamento_id'
-});
-
-//Porte (N) - (N) Servico
-Porte.belongsToMany(Servico, {
-    through: PorteServico,
+// Porte (N) - (N) Servico
+porte.belongsToMany(servico, {
+    through: porte_servico,
     foreignKey: 'porte_id',
     otherKey: 'servico_id',
     as: 'servicos'
 });
-
-Servico.belongsToMany(Porte, {
-    through: PorteServico,
+servico.belongsToMany(porte, {
+    through: porte_servico,
     foreignKey: 'servico_id',
     otherKey: 'porte_id',
     as: 'portes'
 });
 
-//Agendamento (N) - (N) Servico
-Agendamento.belongsToMany(Servico, {
-    through: AgendamentoServico,
+// Cliente (1) - (N) Pagamento
+cliente.hasMany(pagamento, {
+    foreignKey: 'cliente_id'
+});
+pagamento.belongsTo(cliente, {
+    foreignKey: 'cliente_id' 
+});
+
+// Porte (1) - (N) agendamento_servico
+porte.hasMany(agendamento_servico, {
+    foreignKey: 'porte_id' 
+});
+agendamento_servico.belongsTo(porte, {
+    foreignKey: 'porte_id' 
+});
+
+// Agendamento (N) - (N) Servico
+agendamento.belongsToMany(servico, {
+    through: agendamento_servico,
     foreignKey: 'agendamento_id',
     otherKey: 'servico_id',
     as: 'servicos'
 });
-
-Servico.belongsToMany(Agendamento, {
-    through: AgendamentoServico,
+servico.belongsToMany(agendamento, {
+    through: agendamento_servico,
     foreignKey: 'servico_id',
     otherKey: 'agendamento_id',
     as: 'agendamentos'
 });
 
 module.exports = {
-  Empresa,
-  Cliente,
-  Pet,
-  Porte,
-  Agendamento,
-  AgendamentoServico,
-  PorteServico,
-  Servico,
-  Pagamento
+    empresa,
+    cliente,
+    pet,
+    porte,
+    agendamento,
+    agendamento_servico,
+    porte_servico,
+    servico,
+    pagamento
 };

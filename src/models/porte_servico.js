@@ -1,8 +1,8 @@
-const { DataTypes } = require('conexao');
+const { DataTypes } = require('sequelize');
 const conexao = require('./config/database');
 
 const porte_servico = conexao.define('porte_servico', {
-    porte_servico_id: {
+    porteServico_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -16,7 +16,7 @@ const porte_servico = conexao.define('porte_servico', {
         type: DataTypes.DECIMAL(10, 2),
     }, 
 }, {
-    tableName: porte_servico,
+    tableName: 'porte_servico',
     timestamps: false
 });
 

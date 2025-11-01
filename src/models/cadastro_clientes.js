@@ -13,7 +13,7 @@ const cliente = conexao.define('cliente', {
         allowNull: false
     },
     telefone: {
-        type: DataTypes.INTERGER(20),
+        type: DataTypes.STRING(20),
         allowNull: false,
         unique: true
     },
@@ -29,11 +29,10 @@ const cliente = conexao.define('cliente', {
     senha: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     }
 }, {
     tableName: 'cliente',
-    timestamps: false
+    timestamps: true
 });
 
 
